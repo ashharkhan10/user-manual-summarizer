@@ -1,0 +1,6 @@
+.env
+chunks.pkl
+vectorstore.faiss
+manual_text.txt
+manual.pdf.pdf
+__pycache__
