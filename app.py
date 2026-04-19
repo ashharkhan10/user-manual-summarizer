@@ -19,7 +19,12 @@ st.set_page_config(
 )
 
 st.title("🚗 Car Manual Assistant")
-
+selected_language = st.selectbox(
+    "🌍 Select Answer Language",
+    ["English", "Hindi", "Urdu", "Arabic", 
+     "French", "Spanish", "German"],
+    help="Choose language for answers"
+)
 @st.cache_resource
 def load_model():
     return SentenceTransformer("BAAI/bge-small-en-v1.5")
@@ -58,6 +63,72 @@ def build_index(chunks):
     index.add(embeddings)
     return index
 
+def highlight_keywords(text, question):
+    keywords = [
+        word.lower()
+        for word in question.split()
+        if len(word) > 3
+    ]
+    highlighted = text
+    for keyword in keywords:
+        highlighted = highlighted.replace(
+            keyword,
+            f"**{keyword}**"
+        )
+        highlighted = highlighted.replace(
+            keyword.capitalize(),
+            f"**{keyword.capitalize()}**"
+        )
+    return highlighted
+def compare_manuals(question, manual1_name, manual2_name):
+    manual1 = st.session_state.manuals[manual1_name]
+    manual2 = st.session_state.manuals[manual2_name]
+    
+    answer1, pages1 = ask_question(
+        question,
+        manual1["index"],
+        manual1["chunks"]
+    )
+    answer2, pages2 = ask_question(
+        question,
+        manual2["index"],
+        manual2["chunks"]
+    )
+    
+    try:
+        comparison_response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": f"""You are a car manual expert. 
+                    Compare two answers and point out key 
+                    differences and similarities.
+                    Respond in {selected_language} language."""
+                },
+                {
+                    "role": "user",
+                    "content": f"""Compare these two answers 
+                    about: {question}
+
+                    {manual1_name} says:
+                    {answer1}
+
+                    {manual2_name} says:
+                    {answer2}
+
+                    Give a brief comparison pointing out 
+                    key differences and similarities."""
+                }
+            ],
+            max_tokens=400
+        )
+        comparison = comparison_response.choices[0].message.content
+    except Exception as e:
+        comparison = f"Comparison error: {str(e)}"
+    
+    return answer1, pages1, answer2, pages2, comparison
+
 def ask_question(question, index, chunks):
     try:
         query = model.encode(
@@ -76,7 +147,7 @@ def ask_question(question, index, chunks):
             messages=[
                 {
                     "role": "system",
-                    "content": "Answer questions using only the car manual text. Be clear and simple."
+                    "content": f"Answer questions using only the car manual text. Be clear and simple. Always respond in {selected_language} language."
                 },
                 {
                     "role": "user",
@@ -86,6 +157,7 @@ def ask_question(question, index, chunks):
             max_tokens=300
         )
         answer = response.choices[0].message.content
+        answer = highlight_keywords(answer, question)
         return answer, pages
     except Exception as e:
         return f"Error: {str(e)}", []
@@ -249,10 +321,90 @@ with st.sidebar:
         st.rerun()
 
 # ─── MAIN AREA ───────────────────────────────────────────
+compare_mode = st.toggle(
+    "⚖️ Compare Two Manuals Mode",
+    help="Compare answers from two different manuals"
+)
 if not st.session_state.manuals:
     st.info(
         "👈 Upload a car manual PDF from the sidebar to get started!"
     )
+
+elif compare_mode and len(st.session_state.manuals) < 2:
+    st.warning(
+        "⚠️ Please upload at least 2 manuals to use compare mode!"
+    )
+
+elif compare_mode and len(st.session_state.manuals) >= 2:
+    st.subheader("⚖️ Compare Two Manuals Side by Side")
+    
+    manual_names = list(st.session_state.manuals.keys())
+    
+    col_select1, col_select2 = st.columns(2)
+    with col_select1:
+        manual1_name = st.selectbox(
+            "First Manual",
+            manual_names,
+            index=0,
+            key="manual1"
+        )
+    with col_select2:
+        manual2_name = st.selectbox(
+            "Second Manual",
+            manual_names,
+            index=1,
+            key="manual2"
+        )
+    
+    compare_question = st.text_input(
+        "Ask a question to compare both manuals",
+        placeholder="Example: What is the engine oil type?"
+    )
+    
+    if st.button("🔍 Compare Now", type="primary"):
+        if manual1_name == manual2_name:
+            st.warning("Please select two different manuals!")
+        elif not compare_question:
+            st.warning("Please enter a question!")
+        else:
+            with st.spinner("Comparing manuals..."):
+                answer1, pages1, answer2, pages2, comparison = compare_manuals(
+                    compare_question,
+                    manual1_name,
+                    manual2_name
+                )
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.subheader(f"📖 {manual1_name}")
+                st.markdown(answer1)
+                if pages1:
+                    pages_str = ", ".join(
+                        [str(p) for p in pages1]
+                    )
+                    st.caption(f"📍 Pages: {pages_str}")
+            
+            with col2:
+                st.subheader(f"📖 {manual2_name}")
+                st.markdown(answer2)
+                if pages2:
+                    pages_str = ", ".join(
+                        [str(p) for p in pages2]
+                    )
+                    st.caption(f"📍 Pages: {pages_str}")
+            
+            st.divider()
+            st.subheader("🤖 AI Comparison Summary")
+            st.markdown(comparison)
+            
+            st.session_state.history.append({
+                "question": f"COMPARE: {compare_question}",
+                "answer": f"{manual1_name}:\n{answer1}\n\n{manual2_name}:\n{answer2}",
+                "pages": [],
+                "manual": f"{manual1_name} vs {manual2_name}",
+                "time": datetime.now().strftime("%H:%M")
+            })
 else:
     # Two columns — chat and history
     col1, col2 = st.columns([2, 1])
@@ -266,7 +418,7 @@ else:
         # Show chat messages
         for message in st.session_state.chat:
             with st.chat_message(message["role"]):
-                st.write(message["content"])
+                st.markdown(message["content"])
                 if message.get("pages"):
                     pages_str = ", ".join(
                         [str(p) for p in message["pages"]]
@@ -284,7 +436,7 @@ else:
             ]
 
             with st.chat_message("user"):
-                st.write(question)
+                st.markdown(question)
 
             with st.chat_message("assistant"):
                 with st.spinner("Searching manual..."):
@@ -293,7 +445,7 @@ else:
                         manual["index"],
                         manual["chunks"]
                     )
-                st.write(answer)
+                st.markdown(answer)
                 if pages:
                     pages_str = ", ".join([str(p) for p in pages])
                     st.caption(f"📍 Found on page(s): {pages_str}")
@@ -336,8 +488,8 @@ else:
                     f"🕐 {item['time']} — {item['question'][:40]}..."
                 ):
                     st.caption(f"📖 Manual: {item['manual']}")
-                    st.write(f"**Q:** {item['question']}")
-                    st.write(f"**A:** {item['answer']}")
+                    st.markdown(f"**Q:** {item['question']}")
+                    st.markdown(f"**A:** {item['answer']}")
                     if item['pages']:
                         pages_str = ", ".join(
                             [str(p) for p in item['pages']]
