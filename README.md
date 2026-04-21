@@ -173,7 +173,6 @@ Answer shown with page numbers
 ```
 
 ---
-
 ## System Architecture
 
 ```
@@ -220,6 +219,8 @@ Answer shown with page numbers
 │  └────────────────────────────────────────┘  │
 └──────────────────────────────────────────────┘
 ```
+
+---
 
 ---
 
