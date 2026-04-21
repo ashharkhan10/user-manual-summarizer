@@ -74,21 +74,40 @@ about it instantly.
 
 ### Why This Project?
 
-```
-❌ Without this project:
-   → Open 400 page PDF
-   → Press Ctrl+F and search
-   → Read multiple pages
-   → Still not sure of answer
-   → Takes 10-15 minutes
+Traditional methods of navigating automobile manuals 
+are inefficient and time consuming. This project 
+addresses that gap by providing an intelligent 
+conversational interface powered by modern AI.
 
-✅ With this project:
-   → Upload PDF once
-   → Type your question
-   → Get accurate answer in seconds
-   → See exact page number
-   → Done in 10 seconds
-```
+| Aspect | Traditional Approach | This Project |
+|---|---|---|
+| Time to find answer | 10 to 15 minutes | Under 10 seconds |
+| Method | Manual Ctrl+F search | AI semantic search |
+| Accuracy | Depends on keywords | Understands meaning |
+| Language | Manual language only | Any language |
+| Multiple manuals | Open separately | Switch with dropdown |
+| Technical terms | Must know exact term | Plain English works |
+| Page reference | Search manually | Shown automatically |
+
+### Real World Impact
+
+According to industry research the average vehicle 
+owner consults their car manual only 2 to 3 times 
+per year despite needing information more frequently. 
+The primary reason is the difficulty of navigating 
+dense technical documents. This project removes that 
+barrier entirely by making manual information as 
+accessible as having a conversation.
+
+### Core Value Proposition
+
+This system does not simply search for keywords. 
+It understands the meaning behind your question 
+and retrieves the most contextually relevant 
+information from the manual. A question like 
+"my car is making a weird noise" will find 
+relevant diagnostic information even if those 
+exact words do not appear in the manual.
 
 ### Who Is This For?
 
@@ -669,3 +688,299 @@ scores, indices = index.search(query, k=3)
    Share questions and answers
    Build knowledge base together
 ```
+---
+
+## Contributing
+
+Contributions are welcome and appreciated!
+This project is open source and anyone can 
+help make it better.
+
+### How To Contribute
+
+**Step 1 — Fork the repository**
+- Go to the GitHub repository
+- Click **Fork** button at top right
+- This creates your own copy
+
+**Step 2 — Clone your fork**
+```
+git clone https://github.com/yourusername/user-manual-summarizer.git
+cd user-manual-summarizer
+```
+
+**Step 3 — Create a new branch**
+```
+git checkout -b feature/your-feature-name
+```
+
+**Step 4 — Make your changes**
+- Add your feature or fix
+- Test it properly
+- Make sure nothing is broken
+
+**Step 5 — Commit your changes**
+```
+git add .
+git commit -m "added your feature name"
+```
+
+**Step 6 — Push to your fork**
+```
+git push origin feature/your-feature-name
+```
+
+**Step 7 — Open a Pull Request**
+- Go to original repository on GitHub
+- Click **Pull Requests** tab
+- Click **New Pull Request**
+- Describe what you changed
+- Submit for review
+
+---
+
+### Contribution Guidelines
+
+We maintain high standards for code quality and 
+project integrity. Please read these guidelines 
+carefully before submitting any contribution.
+
+#### Code Quality Standards
+
+| Standard | Requirement |
+|---|---|
+| Code Style | Follow PEP 8 Python standards |
+| Comments | Add docstrings to all functions |
+| Testing | Test all changes before submitting |
+| Commits | Write clear descriptive commit messages |
+| Scope | Keep each pull request focused on one feature |
+| Security | Never include API keys or credentials |
+
+#### Branch Naming Convention
+```
+feature/feature-name     → For new features
+bugfix/bug-description   → For bug fixes
+docs/documentation-update → For documentation
+improvement/what-improved → For improvements
+```
+
+#### Commit Message Convention
+```
+Good commit messages:
+✔ added voice input feature to sidebar
+✔ fixed PDF extraction for scanned files
+✔ updated README with installation steps
+✔ improved keyword highlighting accuracy
+
+Poor commit messages:
+✘ fixed stuff
+✘ changes
+✘ update
+✘ final version
+```
+
+#### Pull Request Requirements
+
+Before submitting a pull request please ensure:
+
+```
+1. Code has been tested locally
+2. No existing features are broken
+3. Code follows existing style and structure
+4. Changes are clearly described in PR description
+5. Screenshots added if UI changes were made
+6. No sensitive data or API keys included
+7. Requirements.txt updated if new libraries added
+```
+
+#### Code Review Process
+```
+Step 1 → Pull request submitted
+Step 2 → Automated checks run
+Step 3 → Code reviewed within 48 hours
+Step 4 → Feedback provided if changes needed
+Step 5 → Approved and merged if all good
+```
+
+#### Reporting Bugs
+
+When reporting a bug please include:
+```
+→ Clear description of the problem
+→ Steps to reproduce the issue
+→ Expected behavior
+→ Actual behavior
+→ Screenshots if applicable
+→ Your operating system and Python version
+```
+
+#### Suggesting Features
+
+When suggesting a new feature please include:
+```
+→ Clear description of the feature
+→ Why it would be useful
+→ How it should work
+→ Any similar examples from other projects
+```
+
+### Ideas For Contribution
+```
+→ Add OCR support for scanned PDFs
+→ Add voice input feature
+→ Improve keyword highlighting
+→ Add more languages
+→ Improve mobile responsiveness
+→ Add maintenance schedule tracker
+→ Write more tests
+→ Improve documentation
+```
+
+---
+
+## License
+
+```
+MIT License
+
+Copyright (c) 2026 Ashhar Khan
+
+Permission is hereby granted free of charge to any 
+person obtaining a copy of this software and 
+associated documentation files to deal in the 
+Software without restriction including without 
+limitation the rights to use copy modify merge 
+publish distribute sublicense and sell copies of 
+the Software.
+
+The above copyright notice and this permission 
+notice shall be included in all copies or 
+substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED AS IS WITHOUT WARRANTY 
+OF ANY KIND EXPRESS OR IMPLIED INCLUDING BUT NOT 
+LIMITED TO THE WARRANTIES OF MERCHANTABILITY 
+FITNESS FOR A PARTICULAR PURPOSE AND 
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS 
+OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM 
+DAMAGES OR OTHER LIABILITY WHETHER IN AN ACTION 
+OF CONTRACT TORT OR OTHERWISE ARISING FROM OUT 
+OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
+
+---
+
+## Contact
+
+### Ashhar Khan
+
+```
+📧 Email    : ashharkhan486@gmail.com
+🐙 GitHub   : https://github.com/ashharkhan10
+💼 LinkedIn : www.linkedin.com/in/ashhar-khan-274a15288
+```
+
+### Project Links
+```
+🔗 Repository : https://github.com/ashharkhan10/user-manual-summarizer
+🐛 Bug Reports: https://github.com/ashharkhan10/user-manual-summarizer/issues
+💡 Feature Req: https://github.com/ashharkhan10/user-manual-summarizer/issues
+```
+
+### Response Time
+```
+I try to respond to all issues and 
+pull requests within 48 hours.
+```
+
+---
+
+## Acknowledgements
+
+### Technologies Used
+```
+🙏 Groq
+   For providing free and fast LLaMA API
+   https://groq.com
+
+🙏 Hugging Face
+   For free embedding models
+   https://huggingface.co
+
+🙏 Facebook AI Research
+   For FAISS vector search library
+   https://faiss.ai
+
+🙏 Streamlit
+   For easy Python web framework
+   https://streamlit.io
+
+🙏 Meta AI
+   For LLaMA 3.3 70B language model
+   https://ai.meta.com
+
+🙏 ManualsLib
+   For free car manual PDFs for testing
+   https://manualslib.com
+```
+
+### Learning Resources
+```
+📚 LangChain Documentation
+   https://python.langchain.com
+
+📚 RAG Tutorial by DeepLearning.AI
+   https://deeplearning.ai
+
+📚 FAISS Documentation
+   https://faiss.ai/index.html
+
+📚 Streamlit Documentation
+   https://docs.streamlit.io
+
+📚 Sentence Transformers Docs
+   https://sbert.net
+```
+
+### Special Thanks
+```
+⭐ Claude AI by Anthropic
+   For helping build and debug this project
+   https://claude.ai
+
+⭐ Stack Overflow Community
+   For solutions to coding problems
+
+⭐ GitHub Community
+   For open source inspiration
+```
+
+---
+
+## Project Stats
+
+```
+📅 Started      : April 2026
+✅ Completed    : April 2026
+⏱️ Time Taken  : 1 Week
+📝 Lines of Code: ~300
+🐛 Bugs Fixed   : Many!
+☕ Coffee Needed: A lot!
+```
+
+---
+
+## Support
+
+If this project helped you please consider:
+
+```
+⭐ Starring the repository on GitHub
+🍴 Forking it to build your own version
+📢 Sharing it with others who might find it useful
+🐛 Reporting any bugs you find
+💡 Suggesting new features
+```
+
+---
