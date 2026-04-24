@@ -13,14 +13,14 @@ from datetime import datetime
 load_dotenv()
 
 st.set_page_config(
-    page_title="Car Manual Assistant",
-    page_icon="🚗",
+    page_title="Automobile Manual Assistant ",
+    page_icon="",
     layout="wide"
 )
 
-st.title("🚗 Car Manual Assistant")
+st.title(" Automobile Manual Assistant ")
 selected_language = st.selectbox(
-    "🌍 Select Answer Language",
+    "Select Answer Language",
     ["English", "Hindi", "Urdu", "Arabic", 
      "French", "Spanish", "German"],
     help="Choose language for answers"
@@ -214,7 +214,7 @@ if "selected_manual" not in st.session_state:
 
 # ─── SIDEBAR ────────────────────────────────────────────
 with st.sidebar:
-    st.header("📄 Upload Manual")
+    st.header(" Upload Manual")
 
     uploaded_file = st.file_uploader(
         "Choose a PDF file",
@@ -229,7 +229,7 @@ with st.sidebar:
             help="Example: Toyota Camry 2023"
         )
 
-        if st.button("🔄 Process Manual", type="primary"):
+        if st.button("Process Manual", type="primary"):
             with st.spinner("Processing manual... please wait..."):
                 with tempfile.NamedTemporaryFile(
                     delete=False,
@@ -256,7 +256,7 @@ with st.sidebar:
     # Dropdown to select manual
     if st.session_state.manuals:
         st.divider()
-        st.header("📚 Select Manual")
+        st.header(" Select Manual")
         manual_names = list(st.session_state.manuals.keys())
         selected = st.selectbox(
             "Choose which manual to search",
@@ -273,7 +273,7 @@ with st.sidebar:
 
         # Show all uploaded manuals
         st.divider()
-        st.header("📖 Uploaded Manuals")
+        st.header(" Uploaded Manuals")
         for name, data in st.session_state.manuals.items():
             if name == st.session_state.selected_manual:
                 st.success(f"▶ {name}")
@@ -284,13 +284,13 @@ with st.sidebar:
     st.divider()
 
     # Summarize section
-    st.header("📋 Summarize Topic")
+    st.header(" Summarize Topic")
     topic_input = st.text_input(
         "Enter topic to summarize",
         placeholder="Example: engine oil, brakes, tyres"
     )
 
-    if st.button("✨ Summarize", use_container_width=True):
+    if st.button(" Summarize", use_container_width=True):
         if not st.session_state.manuals:
             st.warning("Please upload a manual first!")
         elif not topic_input:
@@ -307,7 +307,7 @@ with st.sidebar:
                 )
                 st.session_state.chat.append({
                     "role": "assistant",
-                    "content": f"📋 **Summary of '{topic_input}':**\n\n{summary}",
+                    "content": f" **Summary of '{topic_input}':**\n\n{summary}",
                     "pages": pages,
                     "type": "summary"
                 })
@@ -316,7 +316,7 @@ with st.sidebar:
     st.divider()
 
     # Clear chat button
-    if st.button("🗑️ Clear Chat", use_container_width=True):
+    if st.button(" Clear Chat", use_container_width=True):
         st.session_state.chat = []
         st.rerun()
 
@@ -327,16 +327,16 @@ compare_mode = st.toggle(
 )
 if not st.session_state.manuals:
     st.info(
-        "👈 Upload a car manual PDF from the sidebar to get started!"
+        " Upload a car manual PDF from the sidebar to get started!"
     )
 
 elif compare_mode and len(st.session_state.manuals) < 2:
     st.warning(
-        "⚠️ Please upload at least 2 manuals to use compare mode!"
+        " Please upload at least 2 manuals to use compare mode!"
     )
 
 elif compare_mode and len(st.session_state.manuals) >= 2:
-    st.subheader("⚖️ Compare Two Manuals Side by Side")
+    st.subheader(" Compare Two Manuals Side by Side")
     
     manual_names = list(st.session_state.manuals.keys())
     
@@ -361,7 +361,7 @@ elif compare_mode and len(st.session_state.manuals) >= 2:
         placeholder="Example: What is the engine oil type?"
     )
     
-    if st.button("🔍 Compare Now", type="primary"):
+    if st.button(" Compare Now", type="primary"):
         if manual1_name == manual2_name:
             st.warning("Please select two different manuals!")
         elif not compare_question:
@@ -377,25 +377,25 @@ elif compare_mode and len(st.session_state.manuals) >= 2:
             col1, col2 = st.columns(2)
             
             with col1:
-                st.subheader(f"📖 {manual1_name}")
+                st.subheader(f" {manual1_name}")
                 st.markdown(answer1)
                 if pages1:
                     pages_str = ", ".join(
                         [str(p) for p in pages1]
                     )
-                    st.caption(f"📍 Pages: {pages_str}")
+                    st.caption(f" Pages: {pages_str}")
             
             with col2:
-                st.subheader(f"📖 {manual2_name}")
+                st.subheader(f" {manual2_name}")
                 st.markdown(answer2)
                 if pages2:
                     pages_str = ", ".join(
                         [str(p) for p in pages2]
                     )
-                    st.caption(f"📍 Pages: {pages_str}")
+                    st.caption(f" Pages: {pages_str}")
             
             st.divider()
-            st.subheader("🤖 AI Comparison Summary")
+            st.subheader(" AI Comparison Summary")
             st.markdown(comparison)
             
             st.session_state.history.append({
@@ -412,7 +412,7 @@ else:
     # Chat column
     with col1:
         st.subheader(
-            f"💬 Chat — {st.session_state.selected_manual}"
+            f" Chat — {st.session_state.selected_manual}"
         )
 
         # Show chat messages
@@ -423,7 +423,7 @@ else:
                     pages_str = ", ".join(
                         [str(p) for p in message["pages"]]
                     )
-                    st.caption(f"📍 Found on page(s): {pages_str}")
+                    st.caption(f" Found on page(s): {pages_str}")
 
         # Question input
         question = st.chat_input(
@@ -448,7 +448,7 @@ else:
                 st.markdown(answer)
                 if pages:
                     pages_str = ", ".join([str(p) for p in pages])
-                    st.caption(f"📍 Found on page(s): {pages_str}")
+                    st.caption(f" Found on page(s): {pages_str}")
 
             # Save to chat
             st.session_state.chat.append({
@@ -472,26 +472,26 @@ else:
 
     # History column
     with col2:
-        st.subheader("🕐 Search History")
+        st.subheader(" Search History")
 
         if not st.session_state.history:
             st.info("Your search history will appear here!")
         else:
             # Clear history button
-            if st.button("🗑️ Clear History"):
+            if st.button(" Clear History"):
                 st.session_state.history = []
                 st.rerun()
 
             # Show history newest first
             for item in reversed(st.session_state.history):
                 with st.expander(
-                    f"🕐 {item['time']} — {item['question'][:40]}..."
+                    f" {item['time']} — {item['question'][:40]}..."
                 ):
-                    st.caption(f"📖 Manual: {item['manual']}")
+                    st.caption(f" Manual: {item['manual']}")
                     st.markdown(f"**Q:** {item['question']}")
                     st.markdown(f"**A:** {item['answer']}")
                     if item['pages']:
                         pages_str = ", ".join(
                             [str(p) for p in item['pages']]
                         )
-                        st.caption(f"📍 Pages: {pages_str}")
+                        st.caption(f" Pages: {pages_str}")
