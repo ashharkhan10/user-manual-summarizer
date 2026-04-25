@@ -4,7 +4,8 @@
 
 ## 🖼️ Project Banner
 
-[Screenshot]<img width="1915" height="877" alt="app_preview" src="https://github.com/user-attachments/assets/440c04d4-7ad2-404b-89ea-ab4a7a032bb4" />
+[Screenshot]<img width="1920" height="1020" alt="Screenshot 2026-04-25 125612" src="https://github.com/user-attachments/assets/dece796a-0df3-4910-b1bc-e445f8f8558a" />
+>
 
 
 ---
