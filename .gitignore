@@ -3,4 +3,7 @@ chunks.pkl
 vectorstore.faiss
 manual_text.txt
 manual.pdf.pdf
+manual.pdf
 __pycache__
+*.pyc
+.DS_Store
