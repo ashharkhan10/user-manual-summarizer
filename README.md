@@ -968,33 +968,4 @@ pull requests within 48 hours.
 
 ⭐ GitHub Community
    For open source inspiration
-```
 
----
-
-## Project Stats
-
-```
-📅 Started      : April 2026
-✅ Completed    : April 2026
-⏱️ Time Taken  : 1 Week
-📝 Lines of Code: ~300
-🐛 Bugs Fixed   : Many!
-☕ Coffee Needed: A lot!
-```
-
----
-
-## Support
-
-If this project helped you please consider:
-
-```
-⭐ Starring the repository on GitHub
-🍴 Forking it to build your own version
-📢 Sharing it with others who might find it useful
-🐛 Reporting any bugs you find
-💡 Suggesting new features
-```
-
----
