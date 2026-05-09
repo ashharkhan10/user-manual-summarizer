@@ -12,13 +12,13 @@
 
 ## 🏷️ Badges
 
-![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.35-red?logo=streamlit)
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.45-red?logo=streamlit)
 ![Groq](https://img.shields.io/badge/Groq-LLaMA_3.3_70B-green)
 ![FAISS](https://img.shields.io/badge/FAISS-Vector_DB-orange)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
-
+![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://user-manual-summarizer.streamlit.app)
 ---
 
 ## 📝 Short Description
@@ -180,7 +180,7 @@ Answer shown with page numbers
 ┌──────────────────────────────────────────────┐
 │           USER INTERFACE LAYER               │
 │         Streamlit Web Application            │
-│           localhost:8501                     │
+│      user-manual-summarizer.streamlit.app    │
 └─────────────────┬────────────────────────────┘
                   │
                   ▼
@@ -287,7 +287,15 @@ Auto-manual-summarizer/
         Generated automatically
         NOT uploaded to GitHub
 ```
+## 🔄 CI/CD Pipeline
 
+This project uses GitHub Actions + Streamlit Cloud for automated deployment.
+
+Every push to the `main` branch automatically:
+1. Runs syntax checks on `app.py`
+2. Deploys the latest version to Streamlit Cloud
+
+**Live App:** https://user-manual-summarizer.streamlit.app
 ---
 
 ## Prerequisites
@@ -351,6 +359,10 @@ https://code.visualstudio.com
 ---
 
 ## Installation
+
+## 🌐 Live Demo
+Try it without installing anything:
+https://user-manual-summarizer.streamlit.app
 
 ### Step 1 — Clone The Repository
 Open terminal and type:
