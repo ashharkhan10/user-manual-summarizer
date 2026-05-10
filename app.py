@@ -415,6 +415,16 @@ else:
             f" Chat — {st.session_state.selected_manual}"
         )
 
+# Show welcome message when chat is empty
+        if not st.session_state.chat:
+            st.markdown("""
+                <div style='text-align: center; padding: 50px; color: gray;'>
+                    <h3> Welcome!</h3>
+                    <p>Ask any question about your car manual below.</p>
+                    <p>Example: <i>What type of engine oil should I use?</i></p>
+                </div>
+            """, unsafe_allow_html=True)
+
         # Show chat messages
         for message in st.session_state.chat:
             with st.chat_message(message["role"]):
