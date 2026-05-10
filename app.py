@@ -425,6 +425,11 @@ else:
                 </div>
             """, unsafe_allow_html=True)
 
+        # Question input
+        question = st.chat_input(
+            "Ask anything about your car manual..."
+        )
+
         # Show chat messages
         for message in st.session_state.chat:
             with st.chat_message(message["role"]):
@@ -434,11 +439,6 @@ else:
                         [str(p) for p in message["pages"]]
                     )
                     st.caption(f" Found on page(s): {pages_str}")
-
-        # Question input
-        question = st.chat_input(
-            "Ask anything about your car manual..."
-        )
 
         if question:
             manual = st.session_state.manuals[
